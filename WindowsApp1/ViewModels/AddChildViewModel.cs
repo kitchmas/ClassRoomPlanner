@@ -143,7 +143,7 @@ namespace ClassRoomPlanner.ViewModels
         public async Task LoadChildrenAsync()
         {
 
-            //Update this file check to be more thorough ...
+            //Update this file check to be more thorough ........
             var a = ApplicationData.Current.LocalFolder.TryGetItemAsync("childrenCollection");
             if (a != null)
             {
