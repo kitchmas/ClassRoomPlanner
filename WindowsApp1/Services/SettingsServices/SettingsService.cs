@@ -3,7 +3,7 @@ using Template10.Common;
 using Template10.Utils;
 using Windows.UI.Xaml;
 
-namespace WindowsApp1.Services.SettingsServices
+namespace ClassRoomPlanner.Services.SettingsServices
 {
     public class SettingsService
     {

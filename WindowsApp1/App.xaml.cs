@@ -1,6 +1,6 @@
 using Windows.UI.Xaml;
 using System.Threading.Tasks;
-using WindowsApp1.Services.SettingsServices;
+using ClassRoomPlanner.Services.SettingsServices;
 using Windows.ApplicationModel.Activation;
 using Template10.Controls;
 using Template10.Common;
@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using Windows.UI.Xaml.Data;
 
-namespace WindowsApp1
+namespace ClassRoomPlanner
 {
     /// Documentation on APIs used in this page:
     /// https://github.com/Windows-XAML/Template10/wiki
@@ -18,6 +18,9 @@ namespace WindowsApp1
     {
         public App()
         {
+            Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
+                Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
+                Microsoft.ApplicationInsights.WindowsCollectors.Session);
             InitializeComponent();
             SplashFactory = (e) => new Views.Splash(e);
 
@@ -52,9 +55,9 @@ namespace WindowsApp1
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             // long-running startup tasks go here
-            await Task.Delay(1000);
+            await Task.Delay(100);
 
-            NavigationService.Navigate(typeof(Views.MainPage));
+            NavigationService.Navigate(typeof(Views.WelcomePage));
             await Task.CompletedTask;
         }
     }

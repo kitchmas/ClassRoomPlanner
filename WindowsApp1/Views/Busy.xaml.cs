@@ -6,7 +6,7 @@ using Template10.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace WindowsApp1.Views
+namespace ClassRoomPlanner.Views
 {
     public sealed partial class Busy : UserControl
     {
