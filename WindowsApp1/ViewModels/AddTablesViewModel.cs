@@ -10,6 +10,8 @@ using Template10.Mvvm;
 using Windows.Storage;
 using Windows.UI.Xaml.Navigation;
 using ClassRoomPlanner.Model;
+using System.Runtime.Serialization.Json;
+using System.Diagnostics;
 
 namespace ClassRoomPlanner.ViewModels
 {
@@ -81,51 +83,93 @@ namespace ClassRoomPlanner.ViewModels
         private async Task SaveTablesAsync()
         {
 
-            StorageFile savedCollection = await ApplicationData.Current.LocalFolder.CreateFileAsync("tableCollection", CreationCollisionOption.ReplaceExisting);
-
-            try
+            var serializer = new DataContractJsonSerializer(typeof(ObservableCollection<Child>));
+            using (var stream = await ApplicationData.Current.LocalFolder.OpenStreamForWriteAsync(
+                          "tableCollection",
+                          CreationCollisionOption.ReplaceExisting))
             {
-                using (Stream ws = await savedCollection.OpenStreamForWriteAsync())
-                {
-                    DataContractSerializer tableCollectionSerializer = new DataContractSerializer(typeof(ObservableCollection<Table<Child>>));
-                    tableCollectionSerializer.WriteObject(ws, TablesInClass);
-                   
+                serializer.WriteObject(stream, TablesInClass);
+            }
 
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Error Serializing", e);
-            }
+
+            //StorageFile savedCollection = await ApplicationData.Current.LocalFolder.CreateFileAsync("tableCollection", CreationCollisionOption.ReplaceExisting);
+
+            //try
+            //{
+            //    using (Stream ws = await savedCollection.OpenStreamForWriteAsync())
+            //    {
+            //        DataContractSerializer tableCollectionSerializer = new DataContractSerializer(typeof(ObservableCollection<Table<Child>>));
+            //        tableCollectionSerializer.WriteObject(ws, TablesInClass);
+
+
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    throw new Exception("Error Serializing", e);
+            //}
 
         }
 
         public async Task LoadTablesAsync()
         {
-
-            try {
-              
-                using (var readStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("tableCollection"))
-                {
-
-                    if (readStream == null)
-                    {
-                        return;
-                    }
-
-                    DataContractSerializer tableSerializer = new DataContractSerializer(typeof(ObservableCollection<Table<Child>>));
-
-                    var tableCollecton = (ObservableCollection<Table<Child>>)tableSerializer.ReadObject(readStream);
-                    foreach (var table in tableCollecton)
-                    {
-                        TablesInClass.Add(table);
-                    }
-                }
-        }catch(Exception e)
+            //Update this file check to be more thorough ........
+            var a = ApplicationData.Current.LocalFolder.TryGetItemAsync("tableCollection");
+            if (a != null)
             {
-                // The folder has not been created yet. This only occurus when navigating to the page for the first time.
-                return;
+
+                try
+                {
+                    using (var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("tableCollection"))
+                        if (myStream != null)
+                        {
+                            DataContractJsonSerializer tableSerializer = new DataContractJsonSerializer(typeof(ObservableCollection<Table<Child>>));
+                            var tableCollection = (ObservableCollection<Table<Child>>)tableSerializer.ReadObject(myStream);
+
+                            foreach (var table in tableCollection)
+                            {
+                                TablesInClass.Add(table);
+
+                            }
+                        }
+                }
+                catch (FileNotFoundException e)
+                {
+                    Debug.WriteLine(e.ToString());
+
+                }
             }
+            else
+            {
+                await ApplicationData.Current.LocalFolder.CreateFileAsync("childrenCollection");
+            }
+
+
+
+
+            //    try {
+
+            //        using (var readStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("tableCollection"))
+            //        {
+
+            //            if (readStream == null)
+            //            {
+            //                return;
+            //            }
+
+            //            DataContractSerializer tableSerializer = new DataContractSerializer(typeof(ObservableCollection<Table<Child>>));
+
+            //            var tableCollecton = (ObservableCollection<Table<Child>>)tableSerializer.ReadObject(readStream);
+            //            foreach (var table in tableCollecton)
+            //            {
+            //                TablesInClass.Add(table);
+            //            }
+            //        }
+            //}catch(Exception e)
+            //    {
+            //        // The folder has not been created yet. This only occurus when navigating to the page for the first time.
+            //        return;
+            //    }
 
         }
 
