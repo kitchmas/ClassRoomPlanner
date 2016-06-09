@@ -12,10 +12,11 @@ using Template10.Services.NavigationService;
 using Windows.Storage;
 using Windows.UI.Xaml.Navigation;
 using ClassRoomPlanner.Model;
+using WindowsApp1.ViewModels;
 
 namespace ClassRoomPlanner.ViewModels
 {
-   public class EditChildViewModel : ViewModelBase
+   public class EditChildViewModel : ClassRoomViewModelBase
     {
 
         private ObservableCollection<Child> childrenInClass = new ObservableCollection<Child>();
@@ -41,40 +42,10 @@ namespace ClassRoomPlanner.ViewModels
 
       
 
-        public async Task LoadChildrenAsync()
-        {
-            using (var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("childrenCollection"))
-
-            {
-                DataContractJsonSerializer childSerializer = new DataContractJsonSerializer(typeof(ObservableCollection<Child>));
-                var childrenCollection = (ObservableCollection<Child>)childSerializer.ReadObject(myStream);
-
-                foreach (var child in childrenCollection)
-                {
-                    ChildrenInClass.Add(child);
-
-                }
-            }
+     
 
 
 
-
-            //using (var readStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("childrenCollection"))
-            //{
-
-            //    if (readStream == null)
-            //    {
-            //        return;
-            //    }
-
-            //    DataContractSerializer childSerializer = new DataContractSerializer(typeof(ObservableCollection<Child>));
-            //    var childrenCollecton = (ObservableCollection<Child>)childSerializer.ReadObject(readStream);
-            //    foreach (var child in childrenCollecton)
-            //    {
-            //        ChildrenInClass.Add(child);
-            //    }
-            //}
-        }
 
     
 
@@ -82,7 +53,7 @@ namespace ClassRoomPlanner.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
 
-            await LoadChildrenAsync();
+            childrenInClass = await ChildrenDataService.LoadChildrenAsync();
             //Move this next line to somewhere more approperitate
            
             await base.OnNavigatedToAsync(parameter, mode, state);

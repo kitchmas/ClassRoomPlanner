@@ -19,7 +19,7 @@
                 </Grid.RowDefinitions>
 
 
-                <TextBlock Text="" FontSize="24" HorizontalAlignment="Center" Margin="10"/>
+                <!--<TextBlock Text="" FontSize="24" HorizontalAlignment="Center" Margin="10"/>
                 <ListView Name="ListingView"  Height="200"  HorizontalAlignment="Center" Grid.Row="1" CanDragItems="True" AllowDrop="True"
                           CanReorderItems="True"
                           DragItemsStarting="ListView_DragItemsStarting"
@@ -27,7 +27,7 @@
                           
                           DragItemsCompleted="ListView_DragItemsCompleted"
                           Drop="ListView_Drop" ItemsSource="" 
-                          />
+                          />-->
 
 
             </Grid>

@@ -107,8 +107,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectionChangedConverter.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
+    <Compile Include="Services\TableDataService.cs" />
     <Compile Include="ViewModels\AddChildViewModel.cs" />
     <Compile Include="ViewModels\AddTablesViewModel.cs" />
+    <Compile Include="Services\ChildrenDataService.cs" />
+    <Compile Include="ViewModels\ClassRoomViewModelBase.cs" />
     <Compile Include="ViewModels\EditDistractingChildrenViewModel.cs" />
     <Compile Include="ViewModels\EditChildViewModel.cs" />
     <Compile Include="ViewModels\SeatPlanViewModel.cs" />

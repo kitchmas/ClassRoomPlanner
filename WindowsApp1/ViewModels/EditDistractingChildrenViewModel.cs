@@ -13,10 +13,11 @@ using Template10.Services.NavigationService;
 using Windows.Storage;
 using Windows.UI.Xaml.Navigation;
 using ClassRoomPlanner.Model;
+using WindowsApp1.ViewModels;
 
 namespace ClassRoomPlanner.ViewModels
 {
-    public class EditDistractingChildrenViewModel: ViewModelBase
+    public class EditDistractingChildrenViewModel: ClassRoomViewModelBase
     {
 
 
@@ -80,42 +81,10 @@ namespace ClassRoomPlanner.ViewModels
             return;
         }
 
-        public async Task LoadChildrenAsync()
-        {
-
-            using (var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("childrenCollection"))
-
-            {
-                DataContractJsonSerializer childSerializer = new DataContractJsonSerializer(typeof(ObservableCollection<Child>));
-                var childrenCollection = (ObservableCollection<Child>)childSerializer.ReadObject(myStream);
-
-                foreach (var child in childrenCollection)
-                {
-                    ChildrenInClass.Add(child);
-
-                }
-            }
+      
 
 
-
-
-            //using (var readStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("childrenCollection"))
-            //{
-
-            //    if (readStream == null)
-            //    {
-            //        return;
-            //    }
-
-            //    DataContractSerializer childSerializer = new DataContractSerializer(typeof(ObservableCollection<Child>));
-            //    var childrenCollecton = (ObservableCollection<Child>)childSerializer.ReadObject(readStream);
-            //    foreach (var child in childrenCollecton)
-            //    {
-            //        ChildrenInClass.Add(child);
-            //    }
-            //}
-
-        }
+        
 
         public void ResetCopyOfChildrenInClass()
         {
@@ -125,51 +94,30 @@ namespace ClassRoomPlanner.ViewModels
             }
         }
 
-        private async Task SaveChildrenAsync()
-        {
-
-
-
-            var serializer = new DataContractJsonSerializer(typeof(ObservableCollection<Child>));
-            using (var stream = await ApplicationData.Current.LocalFolder.OpenStreamForWriteAsync(
-                          "childrenCollection",
-                          CreationCollisionOption.ReplaceExisting))
-            {
-                serializer.WriteObject(stream, ChildrenInClass);
-            }
-
-            //StorageFile savedCollection = await ApplicationData.Current.LocalFolder.CreateFileAsync("childrenCollection", CreationCollisionOption.ReplaceExisting);
-
-            //try
-            //{
-            //    using (Stream ws = await savedCollection.OpenStreamForWriteAsync())
-            //    {
-            //        DataContractSerializer ChildColleictionSerializer = new DataContractSerializer(typeof(ObservableCollection<Child>));
-            //        ChildColleictionSerializer.WriteObject(ws, ChildrenInClass);
-            //        await ws.FlushAsync();
-            //        ws.Dispose();
-
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    throw new Exception("Error Serializing", e);
-            //}
-
-        }
-
+       
 
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             currentChild = (Child)parameter;
             LoadSelectedChildren();
-            await LoadChildrenAsync();
+            ObservableCollection<Child> children = await ChildrenDataService.LoadChildrenAsync();
+
+            UpdateChildrenInClass(children);
             //Move this next line to somewhere more approperitate
             ResetCopyOfChildrenInClass();
             await base.OnNavigatedToAsync(parameter, mode, state);
 
            
+        }
+
+        private void UpdateChildrenInClass(ObservableCollection<Child> children)
+        {
+            if (children != null)
+                foreach (var child in children)
+                {
+                    ChildrenInClass.Add(child);
+                }
         }
 
         public override async Task OnNavigatingFromAsync(NavigatingEventArgs args)
@@ -191,7 +139,7 @@ namespace ClassRoomPlanner.ViewModels
             {
                 UpdateChild();
 
-                await SaveChildrenAsync();
+                await ChildrenDataService.SaveChildrenAsync(ChildrenInClass);
                 NavigationService.Navigate(typeof(Views.EditChildPage));
             }
 

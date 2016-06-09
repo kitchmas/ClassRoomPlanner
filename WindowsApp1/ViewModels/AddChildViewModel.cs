@@ -15,15 +15,21 @@ using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Navigation;
 using ClassRoomPlanner.Model;
 using System.Diagnostics;
+using WindowsApp1.ViewModels;
 
 namespace ClassRoomPlanner.ViewModels
 {
-    public class AddChildViewModel : ViewModelBase
+    public class AddChildViewModel : ClassRoomViewModelBase
     {
+
+
         private ObservableCollection<Child> childrenInClass = new ObservableCollection<Child>();
         public ObservableCollection<Child> ChildrenInClass
         {
             get { return childrenInClass; }
+            set {
+                childrenInClass = value;
+ }
         }
 
         private Child selectedChild; //used to add clicked children too SelectedChildren.
@@ -106,108 +112,36 @@ namespace ClassRoomPlanner.ViewModels
 
 
 
-        private async Task SaveChildrenAsync()
-        {
 
-
-
-            var serializer = new DataContractJsonSerializer(typeof(ObservableCollection<Child>));
-            using (var stream = await ApplicationData.Current.LocalFolder.OpenStreamForWriteAsync(
-                          "childrenCollection",
-                          CreationCollisionOption.ReplaceExisting))
-            {
-                serializer.WriteObject(stream, ChildrenInClass);
-            }
-
-            //StorageFile savedCollection = await ApplicationData.Current.LocalFolder.CreateFileAsync("childrenCollection", CreationCollisionOption.ReplaceExisting);
-
-            //try
-            //{
-            //    using (Stream ws = await savedCollection.OpenStreamForWriteAsync())
-            //    {
-            //        DataContractSerializer ChildColleictionSerializer = new DataContractSerializer(typeof(ObservableCollection<Child>));
-            //        ChildColleictionSerializer.WriteObject(ws, ChildrenInClass);
-            //        await ws.FlushAsync();
-            //        ws.Dispose();
-
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    throw new Exception("Error Serializing", e);
-            //}
-
-
-        }
-
-        public async Task LoadChildrenAsync()
-        {
-
-            //Update this file check to be more thorough ........
-            var a = ApplicationData.Current.LocalFolder.TryGetItemAsync("childrenCollection");
-            if (a != null)
-            {
-
-                try
-                {
-                    using (var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("childrenCollection"))
-                        if (myStream != null)
-                        {
-                            DataContractJsonSerializer childSerializer = new DataContractJsonSerializer(typeof(ObservableCollection<Child>));
-                            var childrenCollection = (ObservableCollection<Child>)childSerializer.ReadObject(myStream);
-
-                            foreach (var child in childrenCollection)
-                            {
-                                ChildrenInClass.Add(child);
-
-                            }
-                        }
-                }
-                catch (FileNotFoundException e)
-                {
-                    Debug.WriteLine(e.ToString());
-
-                }
-            }
-            else
-            {
-                await ApplicationData.Current.LocalFolder.CreateFileAsync("childrenCollection");
-            }
+      
 
 
         
     
 
-
-            //using (var readStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("childrenCollection"))
-            //{
-
-            //    if (readStream == null)
-            //    {
-            //        return;
-            //    }
-
-            //    DataContractSerializer childSerializer = new DataContractSerializer(typeof(ObservableCollection<Child>));
-            //    var childrenCollecton = (ObservableCollection<Child>)childSerializer.ReadObject(readStream);
-            //    foreach (var child in childrenCollecton)
-            //    {
-            //        ChildrenInClass.Add(child);
-            //    }
-            //}
-
-        }
-
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
         {
-            await SaveChildrenAsync();
+            await ChildrenDataService.SaveChildrenAsync(ChildrenInClass);
             await base.OnNavigatedFromAsync(pageState, suspending);
+
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            // child is being returned as null
+          ObservableCollection<Child> children = await ChildrenDataService.LoadChildrenAsync();
 
-            await LoadChildrenAsync();
             await base.OnNavigatedToAsync(parameter, mode, state);
+            UpdateChildrenInClass(children);
+        }
+
+        private void UpdateChildrenInClass(ObservableCollection<Child> children)
+        {
+            if(children != null)
+            foreach (var child in children)
+            {
+                ChildrenInClass.Add(child);
+            }
         }
 
         private DelegateCommand<int> deleteCommand;
