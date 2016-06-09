@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="WindowsApp1.Views.SeatingPlanView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WindowsApp1.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+
+
+    <Page.Resources>
+        <DataTemplate x:Key="TestDataModelTemplate">
+            <Grid Height="Auto" Width="Auto" Margin="10" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+
+                <!--<TextBlock Text="" FontSize="24" HorizontalAlignment="Center" Margin="10"/>
+                <ListView Name="ListingView"  Height="200"  HorizontalAlignment="Center" Grid.Row="1" CanDragItems="True" AllowDrop="True"
+                          CanReorderItems="True"
+                          DragItemsStarting="ListView_DragItemsStarting"
+                          DragOver="ListView_DragOver"
+                          
+                          DragItemsCompleted="ListView_DragItemsCompleted"
+                          Drop="ListView_Drop" ItemsSource="" 
+                          />-->
+
+
+            </Grid>
+        </DataTemplate>
+
+    </Page.Resources>
+
+
+
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" >
+            <Button></Button>
+            <TextBox></TextBox>
+        </StackPanel>
+
+        <GridView Name="GridListView" Grid.Row="1" ItemTemplate="{StaticResource TestDataModelTemplate}" ItemsSource="{Binding TestDataModelCollection, Mode=TwoWay}" IsSwipeEnabled="False" CanReorderItems="True"  CanDrag="True" >
+
+        </GridView>
+
+
+
+
+
+    </Grid>
+</Page>

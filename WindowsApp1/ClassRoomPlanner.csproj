@@ -107,10 +107,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectionChangedConverter.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
+    <Compile Include="Services\TableDataService.cs" />
     <Compile Include="ViewModels\AddChildViewModel.cs" />
     <Compile Include="ViewModels\AddTablesViewModel.cs" />
+    <Compile Include="Services\ChildrenDataService.cs" />
+    <Compile Include="ViewModels\ClassRoomViewModelBase.cs" />
     <Compile Include="ViewModels\EditDistractingChildrenViewModel.cs" />
     <Compile Include="ViewModels\EditChildViewModel.cs" />
+    <Compile Include="ViewModels\SeatPlanViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\WelcomePageViewModel.cs" />
     <Compile Include="Views\AddChildrenPage.xaml.cs">
@@ -127,6 +131,9 @@
     </Compile>
     <Compile Include="Views\EditDistractingChildrenPage.xaml.cs">
       <DependentUpon>EditDistractingChildrenPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SeatingPlanView.xaml.cs">
+      <DependentUpon>SeatingPlanView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -186,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditDistractingChildrenPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SeatingPlanView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

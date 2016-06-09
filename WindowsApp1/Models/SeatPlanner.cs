@@ -20,7 +20,7 @@ namespace ClassRoomPlanner.Model
             if (totalSeats != children.Count-1)
                 throw new ArgumentOutOfRangeException("tables", tables, "Not enough seats");
 
-            children.Randomize(); 
+            children.Shuffle(); 
             int nextChild = 0;
 
            foreach(Table<Child> Table in tables)

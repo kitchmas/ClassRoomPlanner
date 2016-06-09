@@ -8,23 +8,22 @@ namespace ClassRoomPlanner.Model
 {
    public class Table<T>
     {
+        //fix bug where id count starts again on serilization
         private static int idCount = 0;
         
         public int NumberOfChairs { get; set; }
-        private int id;
-        public int Id
-        {
-            get { return id; }
-        }
-        public string Name { get; }
+        public int Id { get; set; }
+    
+        public string Name { get; set; }
         public List<T> ChildrenAtTable { get; set; }
+        public Table() { }
 
         public Table(int numberOfChairs, List<T> childrenAtTable)
         {
             idCount++;
             NumberOfChairs = numberOfChairs;
-            id = idCount;
-            Name = string.Format("Table {0}", id);
+            Id = idCount;
+            Name = string.Format("Table {0}", Id);
             
             ChildrenAtTable = childrenAtTable;
         }
@@ -33,8 +32,8 @@ namespace ClassRoomPlanner.Model
         {
             idCount++;
             NumberOfChairs = numberOfChairs;
-            id = idCount;
-            Name = string.Format("Table {0}", id);
+            Id = idCount;
+            Name = string.Format("Table {0}", Id);
             ChildrenAtTable = new List<T>();
         }
     }

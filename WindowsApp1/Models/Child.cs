@@ -12,8 +12,8 @@ namespace ClassRoomPlanner.Model
     
     public class Child 
     {
-     
-        private static int IdCount = 0;
+        //fix bug where id count starts again on serilization
+        private static int IdCount;
      
         public string Name { get; set; }
        

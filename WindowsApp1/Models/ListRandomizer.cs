@@ -8,18 +8,19 @@ namespace ClassRoomPlanner.Model
 {
     public static class ListRandomizer
     {
-        public static void Randomize<T>(this IList<T> list)
-        {
-            Random rnd = new Random();
-            for (var i = 0; i < list.Count; i++)
-                list.Swap(i, rnd.Next(i, list.Count));
-        }
+        private static Random rng = new Random();
 
-        public static void Swap<T>(this IList<T> list, int i, int j)
+        public static void Shuffle<T>(this IList<T> list)
         {
-            var temp = list[i];
-            list[i] = list[j];
-            list[j] = temp;
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
         }
     }
 }
