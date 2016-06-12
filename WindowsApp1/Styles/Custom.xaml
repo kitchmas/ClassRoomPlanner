@@ -1,7 +1,8 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="using:Template10.Controls"
-                     xmlns:local="using:ClassRoomPlanner">
+                    xmlns:Converters="using:ClassRoomPlanner.Converters"
+                    xmlns:local="using:ClassRoomPlanner">
 
 
     <x:Double x:Key="NarrowMinWidth">0</x:Double>
@@ -12,7 +13,15 @@
     <Color x:Key="ContrastColor">White</Color>
     <Color x:Key="SystemAccentColor">SteelBlue</Color>
 
-    <local:SelectionChangedConverter x:Key="SelectionChangedConverter" />
+    <Converters:SelectionChangedConverter x:Key="SelectionChangedConverter" />
+    <Converters:BoolToBrushConverter x:Key="BoolToBrushConverter" />
+
+    <DataTemplate x:Key="ChildrenListTemplate">
+        <RelativePanel >
+            <TextBlock Text="{Binding Name}" RelativePanel.LeftOf="deleteButton" Foreground="{Binding IsDisruptive , Mode=TwoWay, Converter={StaticResource BoolToBrushConverter}}" />
+            <Button  Name="deleteButton" Command="{Binding ElementName=ListPanel, Path=DataContext.DeleteCommand}" CommandParameter="{Binding Id}"  Content="✖"  Style="{StaticResource ButtonClearStyle}" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True" />
+        </RelativePanel>
+    </DataTemplate>
 
     <ResourceDictionary.ThemeDictionaries>
 

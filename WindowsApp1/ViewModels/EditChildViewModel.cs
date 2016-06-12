@@ -40,7 +40,7 @@ namespace ClassRoomPlanner.ViewModels
         public void GoToEditDistractingChildrenPage() => NavigationService.Navigate(typeof(Views.EditDistractingChildrenPage),SelectedChild);
 
 
-      
+        public void GoToSeatPlanView() => NavigationService.Navigate(typeof(Views.SeatingPlanView));
 
      
 

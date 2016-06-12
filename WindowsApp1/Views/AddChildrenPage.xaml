@@ -25,7 +25,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="400" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -83,8 +83,8 @@
             </StackPanel>
         </StackPanel >
 
-        <StackPanel Name="ListPanel"  Grid.Row="2" Grid.Column="1">
-            <ListView Name="ChildListView" ItemsSource="{Binding ChildrenInClass, Mode=TwoWay}"   >
+        <StackPanel Name="ListPanel"  Grid.Row="2" Grid.Column="1" >
+            <ListView Name="ChildListView" ItemsSource="{Binding ChildrenInClass, Mode=TwoWay}" Height="400">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                       

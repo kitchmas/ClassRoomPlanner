@@ -88,10 +88,17 @@ namespace ClassRoomPlanner.ViewModels
 
         public void ResetCopyOfChildrenInClass()
         {
-            foreach(Child child in ChildrenInClass)
+         
+            foreach (Child child in ChildrenInClass)
             {
+                if (child.Id == currentChild.Id)
+                    continue;
                 CopyOfChildrenInClass.Add(child);
+                
             }
+          
+            
+            //Remove the current child so you can't add the current child to SelectedChildren and crash the program
         }
 
        

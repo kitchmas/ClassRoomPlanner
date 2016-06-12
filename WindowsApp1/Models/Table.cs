@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace ClassRoomPlanner.Model
         public int Id { get; set; }
     
         public string Name { get; set; }
-        public List<T> ChildrenAtTable { get; set; }
+        public ObservableCollection<T> ChildrenAtTable { get; set; }
         public Table() { }
 
         public Table(int numberOfChairs, List<T> childrenAtTable)
@@ -25,7 +26,7 @@ namespace ClassRoomPlanner.Model
             Id = idCount;
             Name = string.Format("Table {0}", Id);
             
-            ChildrenAtTable = childrenAtTable;
+            ChildrenAtTable = new ObservableCollection<T>(childrenAtTable);
         }
 
         public Table(int numberOfChairs)
@@ -34,7 +35,7 @@ namespace ClassRoomPlanner.Model
             NumberOfChairs = numberOfChairs;
             Id = idCount;
             Name = string.Format("Table {0}", Id);
-            ChildrenAtTable = new List<T>();
+            ChildrenAtTable = new ObservableCollection<T>();
         }
     }
 }

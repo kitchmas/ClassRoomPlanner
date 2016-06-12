@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassRoomPlanner.Model
+namespace ClassRoomPlanner.Seating
 {
     public static class ListRandomizer
     {
         private static Random rng = new Random();
 
-        public static void Shuffle<T>(this IList<T> list)
+        public static void Shuffle<T>(this ObservableCollection<T> list)
         {
             int n = list.Count;
             while (n > 1)
