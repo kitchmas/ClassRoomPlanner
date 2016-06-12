@@ -57,12 +57,17 @@
         <TextBlock Name="SelectChildText" Text="Select a child to edit"  RelativePanel.AlignLeftWithPanel="True"
                    RelativePanel.Below="pageHeader" 
                    Margin="10"/>
-        <ComboBox ItemsSource="{x:Bind ViewModel.ChildrenInClass}"
+        <ComboBox x:Name="ChildSelectionCombo"
+            ItemsSource="{x:Bind ViewModel.ChildrenInClass}"
                   SelectedItem="{Binding  SelectedChild, Mode=TwoWay}"
                  SelectionChanged="{x:Bind ViewModel.GoToEditDistractingChildrenPage}"
                   RelativePanel.AlignLeftWithPanel="True"
                   RelativePanel.Below="SelectChildText"/>
-
+        <Button Content="Done" 
+                RelativePanel.Below="ChildSelectionCombo"
+                Margin="10"
+                Click="{x:Bind ViewModel.GoToSeatPlanView}"
+/>
 
     </RelativePanel>
 

@@ -129,7 +129,7 @@ namespace ClassRoomPlanner.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             // child is being returned as null
-          ObservableCollection<Child> children = await ChildrenDataService.LoadChildrenAsync();
+            ObservableCollection<Child> children = await ChildrenDataService.LoadChildrenAsync();
 
             await base.OnNavigatedToAsync(parameter, mode, state);
             UpdateChildrenInClass(children);

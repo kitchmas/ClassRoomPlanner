@@ -22,7 +22,7 @@
        <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"  />
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="400"/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -78,11 +78,12 @@
         <StackPanel Grid.Row="2" Grid.Column="1" >
             <TextBox PlaceholderText="Search Children"
                      Margin="10"/>
-            <ListView  Name="NaughtySelectionList" 
+            <ListView  Name="NaughtySelectionList" Height="400"
                        ItemsSource="{Binding CopyOfChildrenInClass}" 
                        SelectedItem="{Binding SelectedChild, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                        SelectionMode="Multiple"
-                        >
+                       
+                      >
              
                 <Interactivity:Interaction.Behaviors>
                     <Core:EventTriggerBehavior EventName="SelectionChanged">
@@ -109,7 +110,7 @@
             </RelativePanel>
           
             <ListView Name="NaughytSelectedList" 
-                      ItemsSource="{Binding SelectedNaughtyChildren}" >
+                      ItemsSource="{Binding SelectedNaughtyChildren}" Height="400" >
                 <ListView.ItemTemplate>
                     <DataTemplate >
                         <RelativePanel >
