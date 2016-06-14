@@ -44,8 +44,9 @@ namespace ClassRoomPlanner.ViewModels
           childrenInClass = await ChildrenDataService.LoadChildrenAsync();
             await base.OnNavigatedToAsync(parameter, mode, state);
             UpdateTables(tables);
-            SeatPlanner SeatPlanner = new SeatPlanner();
-            SeatPlanner.GenerateCantSitWithSeating(TablesInClass, ChildrenInClass);
+            SeatPlanner SeatPlanner = new SeatPlanner(tablesInClass, childrenInClass);
+            
+          tablesInClass =  SeatPlanner.GenerateCantSitWithSeating();
         }
 
         private void UpdateTables(ObservableCollection<Table<Child>> tables)
