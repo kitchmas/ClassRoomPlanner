@@ -14,6 +14,10 @@ namespace ClassRoomPlanner.ViewModels
 {
     public class SeatingPlanViewModel : ClassRoomViewModelBase
     {
+
+
+        private SeatPlanner SeatPlanner;
+
         private ObservableCollection<Child> childrenInClass = new ObservableCollection<Child>();
         public ObservableCollection<Child> ChildrenInClass
         {
@@ -26,8 +30,16 @@ namespace ClassRoomPlanner.ViewModels
             get { return tablesInClass; }
         }
 
+        public SeatingPlanViewModel()
+        {
+           
+        }
 
 
+        public void GenerateRandomClass() { SeatPlanner.GenerateRandomSeating(); }
+        
+       public void GenerateSeperateSeats() {tablesInClass = SeatPlanner.GenerateCantSitWithBySeat(); }
+       public void GenerateSeperateTables() {tablesInClass = SeatPlanner.GenerateCantSitByTable(); }
 
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
@@ -40,20 +52,26 @@ namespace ClassRoomPlanner.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+
             ObservableCollection<Table<Child>> tables = await TableDataService.LoadTablesAsync();
-          childrenInClass = await ChildrenDataService.LoadChildrenAsync();
+            childrenInClass = await ChildrenDataService.LoadChildrenAsync();
             await base.OnNavigatedToAsync(parameter, mode, state);
             UpdateTables(tables);
-            SeatPlanner SeatPlanner = new SeatPlanner(tablesInClass, childrenInClass);
-            
-          tablesInClass =  SeatPlanner.GenerateCantSitWithSeating();
+            SeatPlanner = new SeatPlanner(tablesInClass, childrenInClass);
+            SeatPlanner.GenerateRandomSeating();
+
         }
+
+
+
+        
 
         private void UpdateTables(ObservableCollection<Table<Child>> tables)
         {
-
+  
             foreach (var table in tables)
             {
+                
                 TablesInClass.Add(table);
             }
         }

@@ -61,10 +61,22 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
 
         <GridView Grid.Row="1" ItemTemplate="{StaticResource SeatPlanGridTemplate }" ItemsSource="{Binding TablesInClass, Mode=TwoWay}" IsSwipeEnabled="False" CanReorderItems="True"  CanDrag="True" />
 
-      
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10">
+            <Button Content="Random Class" Click="{x:Bind ViewModel.GenerateRandomClass}" Margin="10" />
+            <Button Content="Seperate Chairs" Click="{x:Bind ViewModel.GenerateSeperateSeats}" Margin="10" />
+            <Button Content="Seperate Table" Click="{x:Bind ViewModel.GenerateSeperateTables}" Margin="10" />
+        </StackPanel>
+       
+            
+
 
 
 
