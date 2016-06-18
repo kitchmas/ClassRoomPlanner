@@ -21,7 +21,13 @@ namespace ClassRoomPlanner.ViewModels
 {
     public class AddChildViewModel : ClassRoomViewModelBase
     {
-
+        public AddChildViewModel()
+        {
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+            
+            }
+        }
 
         private ObservableCollection<Child> childrenInClass = new ObservableCollection<Child>();
         public ObservableCollection<Child> ChildrenInClass

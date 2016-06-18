@@ -36,10 +36,10 @@ namespace ClassRoomPlanner.ViewModels
         }
 
 
-        public void GenerateRandomClass() { SeatPlanner.GenerateRandomSeating(); }
+        public void GenerateRandomClass() { SeatPlanner.RandomSeating(); }
         
-       public void GenerateSeperateSeats() {tablesInClass = SeatPlanner.GenerateCantSitWithBySeat(); }
-       public void GenerateSeperateTables() {tablesInClass = SeatPlanner.GenerateCantSitByTable(); }
+       public void GenerateSeperateSeats() {tablesInClass = SeatPlanner.DisruptiveCantSitBySeat(); }
+       public void GenerateSeperateTables() {tablesInClass = SeatPlanner.DisruptiveCantSitByTable(); }
 
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
@@ -58,7 +58,7 @@ namespace ClassRoomPlanner.ViewModels
             await base.OnNavigatedToAsync(parameter, mode, state);
             UpdateTables(tables);
             SeatPlanner = new SeatPlanner(tablesInClass, childrenInClass);
-            SeatPlanner.GenerateRandomSeating();
+            SeatPlanner.RandomSeating();
 
         }
 

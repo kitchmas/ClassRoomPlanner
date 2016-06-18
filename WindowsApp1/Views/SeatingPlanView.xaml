@@ -19,6 +19,7 @@
 
 
     <Page.Resources>
+        
         <DataTemplate x:Key="SeatPlanGridTemplate">
             <Grid Height="Auto" Width="Auto" Margin="10" >
                 <Grid.RowDefinitions>
@@ -28,10 +29,10 @@
                 </Grid.RowDefinitions>
 
 
-                <TextBlock Text="{Binding Name}" FontSize="24" HorizontalAlignment="Center" Margin="10" />
+                <TextBlock x:Name="NameLabel" Text="{Binding Name}" FontSize="24" HorizontalAlignment="Center" Margin="10" />
                 <ListView Name="ListingView" Height="200"  HorizontalAlignment="Center" Grid.Row="1"
                           ItemsSource="{Binding ChildrenAtTable}"
-                          ItemTemplate="{StaticResource ChildrenListTemplate}">
+                          ItemTemplate="{StaticResource SPListTemplate}">
 
                    
                       
@@ -54,33 +55,87 @@
     </Page.Resources>
 
 
+        <Grid  VerticalAlignment="Stretch" Background="{StaticResource BackgroundImageTable}">
 
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
+            <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-
-        <GridView Grid.Row="1" ItemTemplate="{StaticResource SeatPlanGridTemplate }" ItemsSource="{Binding TablesInClass, Mode=TwoWay}" IsSwipeEnabled="False" CanReorderItems="True"  CanDrag="True" />
+            <RowDefinition Height="30" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10">
-            <Button Content="Random Class" Click="{x:Bind ViewModel.GenerateRandomClass}" Margin="10" />
-            <Button Content="Seperate Chairs" Click="{x:Bind ViewModel.GenerateSeperateSeats}" Margin="10" />
-            <Button Content="Seperate Table" Click="{x:Bind ViewModel.GenerateSeperateTables}" Margin="10" />
-        </StackPanel>
-       
-            
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                    <VisualState x:Name="VisualStateNarrow">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                        <Setter Target="NameLabel.(FontSize)"
+                                Value="16" />
+                    </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="VisualStateNormal">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <!--  TODO: change properties for normal view  -->
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="VisualStateWide">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <!--  TODO: change properties for wide view  -->
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <!--  header  -->
+            <controls:PageHeader x:Name="pageHeader" Content="Settings Page"
+                             Frame="{x:Bind Frame}"
+                         Grid.Row="0" />
+        <Border Background="Gray" Opacity="0.7"    Grid.Row="2" >
+
+        <GridView
+            x:Name="TableGrid"
+          
+            ItemTemplate="{StaticResource SeatPlanGridTemplate }" 
+            ItemsSource="{Binding TablesInClass, Mode=TwoWay}" 
+            IsSwipeEnabled="False" 
+            CanReorderItems="True"  
+            CanDrag="True" 
+            />
+        </Border>
+
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3">
+                <Button Content="Random Class" 
+                    Click="{x:Bind ViewModel.GenerateRandomClass}"
+                    Margin="10"
+                    HorizontalAlignment="Stretch" />
+                <Button Content="Seperate Chairs" 
+                    Click="{x:Bind ViewModel.GenerateSeperateSeats}" 
+                    Margin="10"
+                    HorizontalAlignment="Stretch" />
+                <Button Content="Seperate Table"
+                    Click="{x:Bind ViewModel.GenerateSeperateTables}" 
+                    Margin="10" 
+                    HorizontalAlignment="Stretch" />
+            </StackPanel>
+
+
+
+        </Grid>
 
 
 
 
 
 
-    </Grid>
 </Page>

@@ -13,10 +13,10 @@
     mc:Ignorable="d">
 
     <Page.DataContext>
-        <vm:EditChildViewModel x:Name="ViewModel" />
+        <vm:EditChildrenViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
-    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <RelativePanel Background="{StaticResource BackgroundImageTable}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
                 <VisualState x:Name="VisualStateNarrow">
@@ -54,21 +54,34 @@
                              RelativePanel.AlignTopWithPanel="True"
                             />
 
-        <TextBlock Name="SelectChildText" Text="Select a child to edit"  RelativePanel.AlignLeftWithPanel="True"
-                   RelativePanel.Below="pageHeader" 
-                   Margin="10"/>
+
+        <Border x:Name="AddChildBorder" Style="{StaticResource CustomGrayBorder}" 
+                RelativePanel.Below="pageHeader"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True">
+
+            <TextBlock x:Name="SelectChildText" 
+                       FontSize="36" Text="Who Would You Like to edit?"
+                       HorizontalAlignment="Center"/>
+        </Border>
+        <RelativePanel x:Name="EditPanel" Margin="0,100,0,0"
+                           RelativePanel.Below="pageHeader"
+                           RelativePanel.AlignHorizontalCenterWithPanel="True">
+            
         <ComboBox x:Name="ChildSelectionCombo"
-            ItemsSource="{x:Bind ViewModel.ChildrenInClass}"
+                  ItemsSource="{x:Bind ViewModel.ChildrenInClass}"
                   SelectedItem="{Binding  SelectedChild, Mode=TwoWay}"
-                 SelectionChanged="{x:Bind ViewModel.GoToEditDistractingChildrenPage}"
+                  SelectionChanged="{x:Bind ViewModel.GoToEditChildPage}"
                   RelativePanel.AlignLeftWithPanel="True"
-                  RelativePanel.Below="SelectChildText"/>
+                  PlaceholderText="Select Child"
+                  Margin="10"
+                 />
         <Button Content="Done" 
-                RelativePanel.Below="ChildSelectionCombo"
+                RelativePanel.RightOf="ChildSelectionCombo"
                 Margin="10"
                 Click="{x:Bind ViewModel.GoToSeatPlanView}"
 />
-
+        </RelativePanel>
     </RelativePanel>
 
 </Page>

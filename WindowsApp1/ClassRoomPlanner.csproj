@@ -113,8 +113,9 @@
     <Compile Include="ViewModels\AddTablesViewModel.cs" />
     <Compile Include="Services\ChildrenDataService.cs" />
     <Compile Include="ViewModels\ClassRoomViewModelBase.cs" />
-    <Compile Include="ViewModels\EditDistractingChildrenViewModel.cs" />
     <Compile Include="ViewModels\EditChildViewModel.cs" />
+    <Compile Include="ViewModels\EditChildrenViewModel.cs" />
+    <Compile Include="ViewModels\EditDistactingPartViewModel.cs" />
     <Compile Include="ViewModels\SeatingPlanViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\WelcomePageViewModel.cs" />
@@ -127,11 +128,14 @@
     <Compile Include="Views\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditChildPage.xaml.cs">
-      <DependentUpon>EditChildPage.xaml</DependentUpon>
+    <Compile Include="Views\EditChildrenPage.xaml.cs">
+      <DependentUpon>EditChildrenPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditDistractingChildrenPage.xaml.cs">
       <DependentUpon>EditDistractingChildrenPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditPage.xaml.cs">
+      <DependentUpon>EditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SeatingPlanView.xaml.cs">
       <DependentUpon>SeatingPlanView.xaml</DependentUpon>
@@ -155,6 +159,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\TablePhoto.jpeg" />
     <Content Include="Help.htm" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -189,11 +194,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\EditChildPage.xaml">
+    <Page Include="Views\EditChildrenPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditDistractingChildrenPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -16,17 +16,58 @@
         <Controls:HamburgerMenu.PrimaryButtons>
             <!--  mainpage button  -->
             <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:WelcomePage" 
-                                          AutomationProperties.Name="Jerry"
+                                          AutomationProperties.Name="Teacher"
                                           >
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Width="48" Height="48"
                                 Symbol="Home" />
                     <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
-                               Text="Home" />
+                               Text="Teacher" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:AddChildrenPage" 
+                                          AutomationProperties.Name="Add Children"
+                                          >
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48"
+                                Symbol="AddFriend" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
+                               Text="Children" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:AddTablesPage" 
+                                          AutomationProperties.Name="Add Tables"
+                                          >
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48"
+                                Symbol="DockBottom" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
+                               Text="Tables" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:EditChildPage" 
+                                          AutomationProperties.Name="Edit Children"
+                                          >
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48"
+                                Symbol="ContactInfo" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
+                               Text="Edit Children" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:SeatingPlanView" 
+                                          AutomationProperties.Name="Class Room"
+                                          >
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48"
+                                Symbol="Library" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
+                               Text="Seating Plan" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
         </Controls:HamburgerMenu.PrimaryButtons>
 
+        
         <Controls:HamburgerMenu.SecondaryButtons>
             <!--  settingspage button  -->
             <Controls:HamburgerButtonInfo x:Name="SettingsButton" PageParameter="0"

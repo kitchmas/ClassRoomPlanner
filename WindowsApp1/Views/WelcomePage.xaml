@@ -15,17 +15,23 @@
     <Page.DataContext>
         <vm:WelcomPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
-    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <RelativePanel  Background="{StaticResource BackgroundImageTable}">
+      
 
-
-        <VisualStateManager.VisualStateGroups>
+            <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
                 <VisualState x:Name="VisualStateNarrow">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for narrow view  -->
+                      
+                        <Setter Target="TeacherPanel.(Margin)"
+                                Value="0,50,0,0" />
+                        <Setter Target="NameBorder.(Margin)"
+                                Value="1" />
+                        <Setter Target="WhatIsYourNameLabel.(FontSize)"
+                                Value="22" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateNormal">
@@ -33,7 +39,9 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for normal view  -->
+                        
+                        <Setter Target="TeacherPanel.(Margin)"
+                                Value="0,100,0,0"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateWide">
@@ -41,33 +49,58 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for wide view  -->
+                      
+                        <Setter Target="TeacherPanel.(Margin)"
+                                Value="0,100,0,0"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
         <!--  header  -->
-        <controls:PageHeader x:Name="pageHeader" Content="Settings Page"
+        <controls:PageHeader x:Name="pageHeader" Content="Welcome"
                              Frame="{x:Bind Frame}"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True" />
 
-        <TextBlock Name="WhatIsYourName" Text="What is your name?  " Margin="10" 
-                   HorizontalAlignment="Center" FontSize="22"
+
+        <Border x:Name="NameBorder"  
+              Style="{StaticResource CustomGrayBorder}"
+               RelativePanel.Below="pageHeader"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+               >
+      
+        <TextBlock Name="WhatIsYourNameLabel" 
+                   Text="What is your name?  "
+                 
+                   HorizontalAlignment="Center" 
+                   FontSize="36"
                    RelativePanel.AlignLeftWithPanel="True"
                           RelativePanel.Below="pageHeader"/>
-        <StackPanel Name="NamePanel" Orientation="Horizontal"
-                    RelativePanel.AlignLeftWithPanel="True"
-                    RelativePanel.Below="WhatIsYourName">
-            <ComboBox  ItemsSource="{Binding Title}" SelectedItem="{Binding TeacherTitle, Mode=TwoWay}" Margin="10"  />
-            <TextBox PlaceholderText="Last Name" Text="{Binding TeacherName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" Margin="10"/>
-        </StackPanel>
-        <Button Content="Next"  HorizontalAlignment="Stretch" Margin="10"
-                RelativePanel.Below="NamePanel"
-                Click="{x:Bind ViewModel.GoToAddChildrenPage}"/>
 
+        </Border>
+        <RelativePanel x:Name="TeacherPanel" RelativePanel.Below="pageHeader"
+                       RelativePanel.AlignHorizontalCenterWithPanel="True">
+        <StackPanel Name="NamePanel" 
+                    Orientation="Horizontal"
+                    >
+            <ComboBox  ItemsSource="{Binding Title}" 
+                       SelectedItem="{Binding TeacherTitle, Mode=TwoWay}"
+                       Margin="10,10,0,10"  />
+            <TextBox PlaceholderText="Last Name" 
+                     Text="{Binding TeacherName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" 
+                     Margin="10"/>
+        </StackPanel>
+        <Button Content="Next"  
+                HorizontalAlignment="Stretch"
+                Margin="10"
+                RelativePanel.Below="NamePanel"
+                RelativePanel.AlignRightWithPanel="True"
+                Click="{x:Bind ViewModel.GoToAddChildrenPage}"/>
+        </RelativePanel>
+     
 
     </RelativePanel>
 </Page>

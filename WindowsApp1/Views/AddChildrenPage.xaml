@@ -15,23 +15,16 @@
     <Page.DataContext>
         <vm:AddChildViewModel x:Name="ViewModel"/>
     </Page.DataContext>
-    
-   
-    
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+
+    <RelativePanel Background="{StaticResource BackgroundImageTable}" >
+ 
+            
      
-           
+      
        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="400" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+       
 
  
 
@@ -43,7 +36,40 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for narrow view  -->
+
+                        <Setter Target="ChildrenAddPanel.(Margin)"
+                                Value="0,50,0,0" />
+                        <Setter Target="AddChildBorder.(Margin)"
+                                Value="1" />
+                        <Setter Target="AddChildLabel.(FontSize)"
+                                Value="22" />
+
+                        <Setter Target="AddChildBorder.(RelativePanel.Below)"
+                               Value="pageHeader" />
+                       
+
+                        <Setter Target="ChildrenAddPanel.(RelativePanel.AlignHorizontalCenterWithPanel)"
+                                Value="True"/>
+
+                        <Setter Target="FinishedButton.(RelativePanel.Below)"
+                                Value="ChildNameText" />
+                        <Setter Target="FinishedButton.(RelativePanel.AlignRightWithPanel)"
+                                Value="True" 
+                                 />
+                        <Setter Target="AddChildButton.(RelativePanel.LeftOf)"
+                                Value="FinishedButton" />
+                        <Setter Target="AddChildButton.(RelativePanel.AlignBottomWith)"
+                                Value="FinishedButton" />
+
+
+
+                        <Setter Target="ListViewPanel.(RelativePanel.Below)"
+                                Value="ChildrenAddPanel" />
+                        <Setter Target="ListViewPanel.(RelativePanel.AlignLeftWithPanel)"
+                                Value="True" />
+                         <Setter Target="ListViewPanel.(RelativePanel.AlignRightWithPanel)"
+                                Value="True" />
+                        
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateNormal">
@@ -51,52 +77,154 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for normal view  -->
+
+                        <Setter Target="AddChildBorder.(RelativePanel.Below)"
+                               Value="pageHeader" />
+
+
+                       
+
+                        <Setter Target="ChildrenAddPanel.(Margin)"
+                                Value="0,100,0,0" />
+
+                        <Setter Target="ChildrenAddPanel.(RelativePanel.AlignHorizontalCenterWithPanel)"
+                                Value="True"/>
+                       
+                    
+                        <Setter Target="AddChildButton.(RelativePanel.Below)"
+                                Value="ChildNameText" />
+                        <Setter Target="FinishedButton.(RelativePanel.RightOf)"
+                                Value="AddChildButton" 
+                                 />
+                        <Setter Target="FinishedButton.(RelativePanel.AlignBottomWith)"
+                                Value="AddChildButton" />
+
+                        <Setter Target="ListViewPanel.(Relativeanel.RightOf)"
+                                Value="ChildrenAddPanel"/>
+                        <Setter Target="ListViewPanel.(Relativeanel.Below)"
+                                Value="pageHeader"/>
+
+                        <Setter Target="ListViewPanel.(RelativePanel.Below)"
+                                Value="ChildrenAddPanel" />
+                        <Setter Target="ListViewPanel.(RelativePanel.AlignLeftWithPanel)"
+                                Value="True" />
+                        <Setter Target="ListViewPanel.(RelativePanel.AlignRightWithPanel)"
+                                Value="True" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateWide">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
-                    </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for wide view  -->
+                        <Setter Target="AddChildBorder.(RelativePanel.Below)"
+                               Value="pageHeader" />
+
+
+                        
+
+                        <Setter Target="ChildrenAddPanel.(Margin)"
+                                Value="0,100,0,0" />
+
+                        <Setter Target="ChildrenAddPanel.(RelativePanel.AlignHorizontalCenterWithPanel)"
+                                Value="True"/>
+
+
+                        <Setter Target="AddChildButton.(RelativePanel.Below)"
+                                Value="ChildNameText" />
+                        <Setter Target="FinishedButton.(RelativePanel.RightOf)"
+                                Value="AddChildButton" 
+                                 />
+                        <Setter Target="FinishedButton.(RelativePanel.AlignBottomWith)"
+                                Value="AddChildButton" />
+
+                        <Setter Target="ListViewPanel.(Relativeanel.RightOf)"
+                                Value="ChildrenAddPanel"/>
+                        <Setter Target="ListViewPanel.(Relativeanel.Below)"
+                                Value="pageHeader"/>
+
+                        <Setter Target="ListViewPanel.(RelativePanel.Below)"
+                                Value="ChildrenAddPanel" />
+                        <Setter Target="ListViewPanel.(RelativePanel.AlignLeftWithPanel)"
+                                Value="True" />
+                        <Setter Target="ListViewPanel.(RelativePanel.AlignRightWithPanel)"
+                                Value="True" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
 
-        <controls:PageHeader x:Name="pageHeader" Content="Settings Page"
+        <controls:PageHeader x:Name="pageHeader" Content="Add Children"
                              Frame="{x:Bind Frame}"
-                             Grid.Row="0"
-                              Grid.ColumnSpan="3"/>
+                            RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True" Text="Detail Page"/>
+        
+        <Border x:Name="AddChildBorder" Style="{StaticResource CustomGrayBorder}" 
+                
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True">
+           
+            <TextBlock x:Name="AddChildLabel" 
+                       FontSize="36" Text="Please Add Some Children" 
+                       HorizontalAlignment="Center"/>
+        </Border>
 
+        <RelativePanel  Name="ChildrenAddPanel"
+                        RelativePanel.Below="pageHeader">
 
-        <StackPanel  Grid.Row="1" Grid.Column="1" Name="ChildrenAddPanel" Orientation="Vertical" >
-            <TextBlock Text="{Binding TeacherName}" HorizontalAlignment="Left" FontSize="22"/>
-            <StackPanel  Orientation="Vertical" >
-
-                <TextBlock Text="Please add some children"  Margin="10" FontSize="22"/>
-                <TextBox PlaceholderText="Child Name" Text="{Binding NewChildName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10" HorizontalAlignment="Stretch"/>
-                <Button Content="Add Child" HorizontalAlignment="Stretch" Margin="10" Click="{x:Bind ViewModel.AddChild}"/>
-                <Button Content="Finished Adding Children" HorizontalAlignment="Stretch" Margin="10" Click="{x:Bind ViewModel.GoToAddTablesPage}" />
-            </StackPanel>
-        </StackPanel >
-
-        <StackPanel Name="ListPanel"  Grid.Row="2" Grid.Column="1" >
-            <ListView Name="ChildListView" ItemsSource="{Binding ChildrenInClass, Mode=TwoWay}" Height="400">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
+            <TextBlock Text="{Binding TeacherName}"  
+                       FontSize="22" />
+          
+            <TextBox  x:Name="ChildNameText" 
+                      PlaceholderText="Child Name"
+                      Text="{Binding NewChildName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="10"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
                       
+                      HorizontalAlignment="Stretch"/>
+            
+            <Button x:Name="FinishedButton" 
+                    Content="Finished" HorizontalAlignment="Stretch"
+                    Margin="10" 
+                    Click="{x:Bind ViewModel.GoToAddTablesPage}" />
+            
+            <Button  x:Name="AddChildButton" 
+                     Content="Add Child"
+                     HorizontalAlignment="Stretch"
+                     Margin="10" 
+                     Click="{x:Bind ViewModel.AddChild}"/>
+           
 
-                            <RelativePanel >
-                                <TextBlock Text="{Binding Name}" RelativePanel.LeftOf="deleteButton"  />
-                                <Button  Name="deleteButton" Command="{Binding ElementName=ListPanel, Path=DataContext.DeleteCommand}" CommandParameter="{Binding Id}"  Content="✖"  Style="{StaticResource ButtonClearStyle}" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True" />
-                            </RelativePanel>
-                        
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+        </RelativePanel >
+
+        <RelativePanel x:Name="ListViewPanel" 
+                     
+                    >
+
+            <TextBlock x:Name="ChildrenLabel"
+                       Margin="10"
+                       Text="Children" FontSize="34"
+                       RelativePanel.AlignHorizontalCenterWithPanel="True"
+                       RelativePanel.AlignTopWithPanel="True"
+                      />
+
+
+            <ListView Name="ChildListView"  
+                    Margin="10"
+                      
+                      ItemsSource="{Binding ChildrenInClass, Mode=TwoWay}" 
+                      Height="400"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                       RelativePanel.Below="ChildrenLabel"
+  ItemTemplate="{StaticResource SPListTemplate}"
+                >
+
+                
+
             </ListView>
-        </StackPanel>
-    </Grid>
+        </RelativePanel>
+
+        
+
+    </RelativePanel>
 </Page>

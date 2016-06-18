@@ -10,32 +10,68 @@ namespace ClassRoomPlanner.Model
    public class Table<T>
     {
         //fix bug where id count starts again on serilization
-        private static int idCount = 0;
         
+
+        private static int m_Counter = 0;
         public int NumberOfChairs { get; set; }
         public int Id { get; set; }
-    
         public string Name { get; set; }
-        public ObservableCollection<T> ChildrenAtTable { get; set; }
-        public Table() { }
-
-        public Table(int numberOfChairs, List<T> childrenAtTable)
+        public bool isEmpty { get { return _childrenAtTable.Count == 0 ? true : false; } }
+        public int SeatsOccupiedCount { get { return _childrenAtTable.Count; } }
+        public int SeatsNotOccupiedCount { get { return NumberOfChairs - _childrenAtTable.Count; } }
+        public bool IsTableFull { get { return _childrenAtTable.Count == NumberOfChairs ? true : false; } }
+        private ObservableCollection<Child> _childrenAtTable;
+        public ObservableCollection<Child> ChildrenAtTable
         {
-            idCount++;
+            get { return _childrenAtTable; }
+            set { _childrenAtTable = value; }
+        }
+
+        public void ClearTable()
+        {
+            ChildrenAtTable.Clear();
+        }
+
+
+        public Table() {
+            this.Id = System.Threading.Interlocked.Increment(ref m_Counter);
+        }
+
+        public Table(int numberOfChairs, List<Child> childrenAtTable)
+        {
+            this.Id = System.Threading.Interlocked.Increment(ref m_Counter);
             NumberOfChairs = numberOfChairs;
-            Id = idCount;
+       
             Name = string.Format("Table {0}", Id);
             
-            ChildrenAtTable = new ObservableCollection<T>(childrenAtTable);
+            ChildrenAtTable = new ObservableCollection<Child>(childrenAtTable);
+        }
+
+        public ObservableCollection<Child> GetChildren()
+        {
+            return ChildrenAtTable;
+        }
+
+        public bool AddChild(Child child)
+        {
+            if (!this.IsTableFull)
+            {
+                this.ChildrenAtTable.Add(child);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Table(int numberOfChairs)
         {
-            idCount++;
+            this.Id = System.Threading.Interlocked.Increment(ref m_Counter);
             NumberOfChairs = numberOfChairs;
-            Id = idCount;
+            
             Name = string.Format("Table {0}", Id);
-            ChildrenAtTable = new ObservableCollection<T>();
+            ChildrenAtTable = new ObservableCollection<Child>();
         }
     }
 }
