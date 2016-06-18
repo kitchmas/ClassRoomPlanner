@@ -13,8 +13,9 @@ namespace ClassRoomPlanner.Model
     public class Child 
     {
         //fix bug where id count starts again on serilization
-        private static int IdCount;
-     
+
+        private static int m_Counter = 0;
+
         public string Name { get; set; }
        
         public int Id { get; set; }
@@ -22,33 +23,47 @@ namespace ClassRoomPlanner.Model
         
         
         public Boolean IsDisruptive { get; set; }
+        public int _naughtyChildrenCount  { get { if (this.IsDisruptive) { return _cantSitWith.Count; }
+                else return 0;
+            }
+        }
+    
+        public List<Child> CantSitWith { get { return _cantSitWith; } set { _cantSitWith = value; } }
 
- 
-   
-        public List<Child> cantSitWith { get; set; }
 
-        public Child() { }
+        private List<Child> _cantSitWith;
+
+        public Child() { this.Id = System.Threading.Interlocked.Increment(ref m_Counter); }
 
         public Child(string name)
         {
             Name = name;
-            IdCount++;
-            Id = IdCount;
+            this.Id = System.Threading.Interlocked.Increment(ref m_Counter);
+          
         }
+
 
         public Child(string name, List<Child> cantSitWith)
         {
             IsDisruptive = true;
-            this.cantSitWith = cantSitWith;
-       
+            this.CantSitWith = cantSitWith;
+            this.Id = System.Threading.Interlocked.Increment(ref m_Counter);
+
+        }
+
+        public void MakeNotDisruptive()
+        {
+            IsDisruptive = false;
+            if(this.CantSitWith != null)
+            this.CantSitWith.Clear();
 
         }
     
-        public void MarkAsNaughty(List<Child> cantSitWith)
+        public void MakeDisruptive(List<Child> cantSitWith)
         {
             
             IsDisruptive = true;
-            this.cantSitWith = cantSitWith;
+            this.CantSitWith = cantSitWith;
          
         }
     

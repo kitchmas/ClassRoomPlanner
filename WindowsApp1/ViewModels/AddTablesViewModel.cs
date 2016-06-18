@@ -26,7 +26,7 @@ namespace ClassRoomPlanner.ViewModels
             get { return numberCollection; }
         }
 
-        private int selectedNumberOfChairs = 1;
+        private int selectedNumberOfChairs;
         public int SelectedNumberOfChairs
         {
             get { return selectedNumberOfChairs; }
@@ -44,6 +44,8 @@ namespace ClassRoomPlanner.ViewModels
 
         public void AddTable() 
         {
+            if (SelectedNumberOfChairs == 0)
+                SelectedNumberOfChairs = 1;
             TablesInClass.Add(new Table<Child>(selectedNumberOfChairs));
             SelectedNumberOfChairs = 1;
         }

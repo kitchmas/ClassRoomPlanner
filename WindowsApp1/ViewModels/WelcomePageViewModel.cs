@@ -7,13 +7,17 @@ using Template10.Mvvm;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
 using ClassRoomPlanner.Views;
+using WindowsApp1.ViewModels;
 
 namespace ClassRoomPlanner.ViewModels
 {
-    public class WelcomPageViewModel : ViewModelBase
+    public class WelcomPageViewModel : ClassRoomViewModelBase
     
     {
         public List<string> Title { get; set; } = new List<string>() { "Ms", "Mrs", "Miss", "Mr" };
+
+
+
 
         private string _teacherTitle = "Mr";
         public string TeacherTitle
@@ -41,7 +45,12 @@ namespace ClassRoomPlanner.ViewModels
             }
         }
 
-        public void GoToAddChildrenPage() => NavigationService.Navigate(typeof(AddChildrenPage),TeacherName);
+        public void GoToAddChildrenPage()
+        {
+         
+            
+            NavigationService.Navigate(typeof(AddChildrenPage));
+                }
 
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)

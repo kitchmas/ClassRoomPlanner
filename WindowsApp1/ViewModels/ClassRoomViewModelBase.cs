@@ -12,7 +12,9 @@ namespace WindowsApp1.ViewModels
     public class ClassRoomViewModelBase : ViewModelBase
     {
 
+
         
+
         public ChildrenDataService ChildrenDataService { get; set; } = new ChildrenDataService();
         public TableDataService TableDataService { get; set; } = new TableDataService();
 

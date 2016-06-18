@@ -16,17 +16,8 @@
         <vm:AddTablesViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+    <RelativePanel  Background="{StaticResource BackgroundImageTable}">
+      
         
         
         <VisualStateManager.VisualStateGroups>
@@ -36,7 +27,21 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for narrow view  -->
+
+                        <Setter Target="TablePanel.(Margin)"
+                                Value="0,50,0,0" />
+                        <Setter Target="TableBorder.(Margin)"
+                                Value="1" />
+                        <Setter Target="PleaseAddTablesLabel.(FontSize)"
+                                Value="22" />
+
+
+                        <Setter Target="ListViewPanel.(RelativePanel.Below)"
+                                Value="TablePanel" />
+                        <Setter Target="ListViewPanel.(RelativePanel.AlignLeftWithPanel)"
+                                Value="True" />
+                        <Setter Target="ListViewPanel.(RelativePanel.AlignRightWithPanel)"
+                                Value="True" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateNormal">
@@ -44,7 +49,13 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for normal view  -->
+
+                        <Setter Target="ListViewPanel.(RelativePanel.Below)"
+                                Value="TablePanel" />
+                        <Setter Target="ListViewPanel.(RelativePanel.AlignLeftWithPanel)"
+                                Value="True" />
+                        <Setter Target="ListViewPanel.(RelativePanel.AlignRightWithPanel)"
+                                Value="True" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateWide">
@@ -52,7 +63,13 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for wide view  -->
+
+                        <Setter Target="ListViewPanel.(RelativePanel.Below)"
+                                Value="TablePanel" />
+                        <Setter Target="ListViewPanel.(RelativePanel.AlignLeftWithPanel)"
+                                Value="True" />
+                        <Setter Target="ListViewPanel.(RelativePanel.AlignRightWithPanel)"
+                                Value="True" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -62,34 +79,75 @@
         <!--  header  -->
         <controls:PageHeader x:Name="pageHeader" Content="Settings Page"
                              Frame="{x:Bind Frame}"
-                             Grid.Row="0"
-                              Grid.ColumnSpan="3"/>
+                              RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"/>
 
-       
-        <StackPanel Grid.Row="1" Grid.Column="1">
-        <TextBlock Name="PleaseAddText" Text="Please add some tables"  />
-            <StackPanel Orientation="Horizontal">
-                <ComboBox Name="NumberCombo"  ItemsSource="{Binding NumberCollection}" SelectedItem="{Binding SelectedNumberOfChairs, Mode=TwoWay}"/>
-                <TextBlock  Name="ChairTextBox" Text="Chairs" />
-            </StackPanel>
+
+        <Border x:Name="TableBorder"
+            Style="{StaticResource CustomGrayBorder}"
+                RelativePanel.Below="pageHeader"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True">
+        <TextBlock Name="PleaseAddTablesLabel" Text="Please add some tables"  
+                   FontSize="36"
+                     HorizontalAlignment="Center" 
+             
+                   RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.Below="pageHeader"/>
+        </Border>
         
-        <Button Name="AddButton" Content="Add"  Click="{x:Bind ViewModel.AddTable}"/>
-        <Button Content="Finished" Click="{x:Bind ViewModel.GoToEditChildPage}"/>
-        </StackPanel>
+        
+            <RelativePanel x:Name="TablePanel" Margin="0,100,0,0"
+                           RelativePanel.Below="pageHeader"
+                           RelativePanel.AlignHorizontalCenterWithPanel="True">
+                
+                <ComboBox Name="NumberCombo"
+                          PlaceholderText="Chairs"
+                          Margin="10,10,0,10"
+                          HorizontalAlignment="Stretch"
+                          ItemsSource="{Binding NumberCollection}" 
+                          SelectedItem="{Binding SelectedNumberOfChairs, Mode=TwoWay}"/>
+                <TextBox  Name="TableNameText" 
+                          PlaceholderText="TableName" 
+                          HorizontalAlignment="Stretch"
+                          RelativePanel.RightOf="NumberCombo"
+                          Margin="10"/>
+            <Button   Margin="10" 
+                      Name="AddButton" Content="Add" 
+                      Click="{x:Bind ViewModel.AddTable}" 
+                      RelativePanel.Below="NumberCombo" 
+                      HorizontalAlignment="Stretch"
+                />
+            <Button   Margin="10"
+                      x:Name="FinishedButton"
+                      Content="Finished" 
+                     
+                      Click="{x:Bind ViewModel.GoToEditChildPage}"
+                      RelativePanel.Below="NumberCombo" 
+                      RelativePanel.AlignRightWithPanel="True"/>
+        </RelativePanel>
+        
+        
 
-        <StackPanel Name="ListPanel"  Grid.Row="2" Grid.Column="1">
-            <ListView Name="ChildListView" ItemsSource="{Binding TablesInClass, Mode=TwoWay}"   >
-                <ListView.ItemTemplate>
-                    <DataTemplate >
-                        <RelativePanel >
-                            <TextBlock Text="{Binding Name}" RelativePanel.LeftOf="deleteButton"  />
-                            <Button  Name="deleteButton" Command="{Binding ElementName=ListPanel, Path=DataContext.DeleteCommand}" CommandParameter="{Binding Id}"  Content="✖"  Style="{StaticResource ButtonClearStyle}" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True" />
-                        </RelativePanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+        <RelativePanel Name="ListViewPanel"  >
+
+            <TextBlock x:Name="ChildrenLabel"
+                       Margin="10"
+                       Text="Tables" FontSize="34"
+                       RelativePanel.AlignHorizontalCenterWithPanel="True"
+                       RelativePanel.AlignTopWithPanel="True"
+                      />
+            <ListView Name="ChildListView" ItemsSource="{Binding TablesInClass, Mode=TwoWay}" 
+                      Height="400"
+                      RelativePanel.AlignHorizontalCenterWithPanel="True"
+                      RelativePanel.Below="ChildrenLabel"
+                      ItemTemplate="{StaticResource SPListTemplate}">
+                
+
             </ListView>
-        </StackPanel>
+        </RelativePanel>
 
 
-    </Grid>
+    </RelativePanel>
 </Page>

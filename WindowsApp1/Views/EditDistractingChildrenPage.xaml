@@ -12,10 +12,25 @@
     xmlns:vm="using:ClassRoomPlanner.ViewModels"
     mc:Ignorable="d">
 
-    <Page.DataContext>
-        <vm:EditDistractingChildrenViewModel x:Name="ViewModel" />
-    </Page.DataContext>
+    <!--<Page.DataContext>
+        <vm:E x:Name="ViewModel" />
+    </Page.DataContext>-->
 
+    <Page.Resources>
+        <Style TargetType="Button">
+     
+        </Style>
+
+
+        <Style TargetType="TextBox">
+
+           
+        </Style>
+
+        <Style TargetType="TextBlock">
+       
+        </Style>
+    </Page.Resources>
  
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -33,14 +48,14 @@
         </Grid.ColumnDefinitions>
 
 
-        <VisualStateManager.VisualStateGroups>
+        <!--<VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
                 <VisualState x:Name="VisualStateNarrow">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
                     </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <!--  TODO: change properties for narrow view  -->
+                    <VisualState.Setters>-->
+                        <!--  TODO: change properties for narrow view  --><!--
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateNormal">
@@ -48,7 +63,7 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for normal view  -->
+                        --><!--  TODO: change properties for normal view  --><!--
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateWide">
@@ -56,22 +71,26 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--  TODO: change properties for wide view  -->
+                        --><!--  TODO: change properties for wide view  --><!--
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
 
-        <controls:PageHeader x:Name="pageHeader" Content="Settings Page"
+        <controls:PageHeader x:Name="pageHeader" Content="Edit Child"
                              Frame="{x:Bind Frame}"
                              Grid.Row="0"
                              Grid.ColumnSpan="4"/>
 
-        <TextBlock Grid.Row="1" Grid.ColumnSpan="4">
-            <Run Text="Who can't "/>
+        <TextBlock Foreground="Black" Grid.Row="1" 
+                  Grid.ColumnSpan="4"
+                 RelativePanel.AlignLeftWithPanel="True"
+                 RelativePanel.AlignTopWithPanel="True">
+            <Run Text="Who Can't"/>
             <Run Text="{x:Bind ViewModel.Name}" />
-            <Run Text=" sit with?" />
+            <Run Text=" sit with?"/>
+            
         </TextBlock>
                  
 
@@ -82,9 +101,9 @@
                        ItemsSource="{Binding CopyOfChildrenInClass}" 
                        SelectedItem="{Binding SelectedChild, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                        SelectionMode="Multiple"
-                       
                       >
-             
+
+
                 <Interactivity:Interaction.Behaviors>
                     <Core:EventTriggerBehavior EventName="SelectionChanged">
                         <Core:InvokeCommandAction Command="{Binding SelectionChangedCommand}"
@@ -92,12 +111,11 @@
                                       InputConverterParameter="{Binding ElementName=NaughtySelectionList}" />
                     </Core:EventTriggerBehavior>
                 </Interactivity:Interaction.Behaviors>
-                
 
 
 
-                
-                
+
+
             </ListView>
         </StackPanel>
 
@@ -117,16 +135,17 @@
                             <TextBlock Text="{Binding Name}" 
                                        RelativePanel.LeftOf="MoveBackButton"  />
                             <Button Name="MoveBackButton" 
+                                    Foreground="Black"
                                     Click="MoveButton_Click" 
                                     Content="✖"  
                                     Style="{StaticResource ButtonClearStyle}" 
                                     RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True"
                                  />
                             
-                                <!--Command="{Binding ElementName=NaughytSelectedList, Path=DataContext.MoveBackCommand}"
+                                --><!--Command="{Binding ElementName=NaughytSelectedList, Path=DataContext.MoveBackCommand}"
                                     CommandParameter="{Binding Id}"
                             Come Back later with a mvvm solution to this problem!
-                            -->
+                            --><!--
 
                         </RelativePanel>
                     </DataTemplate>
@@ -134,17 +153,28 @@
             </ListView>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal">
+
+        <StackPanel Grid.Row="3" 
+                    Grid.Column="2"
+                    Margin="10">
+        <StackPanel 
+                    Orientation="Horizontal">
+        <TextBlock  x:Name="ChangeNameLabel" Text="Change Name :" />
+        <TextBox   x:Name="ChangeNameText" PlaceholderText="New Name" />
+        </StackPanel>
+        <StackPanel  
+                    Orientation="Horizontal">
             <Button Margin="10" 
                     Content="Cancel"
+                    Foreground="Black"
                     Background="White"
+                    BorderBrush="Black"
                     Click="{x:Bind ViewModel.Cancel}"/>
             <Button Content="Confirm" 
                     Background="BlueViolet"
                     Click="{x:Bind ViewModel.FinishedUpdating}"/>
-                    
+
         </StackPanel>
-
-
+        </StackPanel>-->
     </Grid>
 </Page>
