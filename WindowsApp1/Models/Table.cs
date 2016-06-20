@@ -34,7 +34,25 @@ namespace ClassRoomPlanner.Model
 
 
         public Table() {
+           
+        }
+
+        public Table(int numberOfChairs)
+        {
             this.Id = System.Threading.Interlocked.Increment(ref m_Counter);
+            NumberOfChairs = numberOfChairs;
+
+            Name = string.Format("Table {0}", Id);
+            ChildrenAtTable = new ObservableCollection<Child>();
+        }
+
+        public Table(string name, int numberOfChairs)
+        {
+            this.Id = System.Threading.Interlocked.Increment(ref m_Counter);
+            NumberOfChairs = numberOfChairs;
+
+            Name = name;
+            ChildrenAtTable = new ObservableCollection<Child>();
         }
 
         public Table(int numberOfChairs, List<Child> childrenAtTable)
@@ -46,6 +64,8 @@ namespace ClassRoomPlanner.Model
             
             ChildrenAtTable = new ObservableCollection<Child>(childrenAtTable);
         }
+
+
 
         public ObservableCollection<Child> GetChildren()
         {
@@ -65,13 +85,6 @@ namespace ClassRoomPlanner.Model
             }
         }
 
-        public Table(int numberOfChairs)
-        {
-            this.Id = System.Threading.Interlocked.Increment(ref m_Counter);
-            NumberOfChairs = numberOfChairs;
-            
-            Name = string.Format("Table {0}", Id);
-            ChildrenAtTable = new ObservableCollection<Child>();
-        }
+   
     }
 }

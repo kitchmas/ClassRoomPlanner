@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Navigation;
 using ClassRoomPlanner.Model;
 using System.Runtime.Serialization.Json;
 using System.Diagnostics;
-using WindowsApp1.ViewModels;
+using ClassRoomPlanner.ViewModels;
 
 namespace ClassRoomPlanner.ViewModels
 {
@@ -35,6 +35,16 @@ namespace ClassRoomPlanner.ViewModels
                     base.RaisePropertyChanged(); }
         }
 
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                base.RaisePropertyChanged();
+            }
+        }
         private ObservableCollection<Table<Child>> tablesInClass = new ObservableCollection<Table<Child>>();
         public ObservableCollection<Table<Child>> TablesInClass
         {
@@ -46,7 +56,10 @@ namespace ClassRoomPlanner.ViewModels
         {
             if (SelectedNumberOfChairs == 0)
                 SelectedNumberOfChairs = 1;
-            TablesInClass.Add(new Table<Child>(selectedNumberOfChairs));
+            if(!string.IsNullOrEmpty(Name))
+                TablesInClass.Add(new Table<Child>(Name,selectedNumberOfChairs));
+            else
+                TablesInClass.Add(new Table<Child>(selectedNumberOfChairs));
             SelectedNumberOfChairs = 1;
         }
 

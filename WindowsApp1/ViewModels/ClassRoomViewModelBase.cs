@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
-using WindowsApp1.Services;
+using ClassRoomPlanner.Services;
+using ClassRoomPlanner.ViewModels;
 
-namespace WindowsApp1.ViewModels
+namespace ClassRoomPlanner.ViewModels
 {
     //Summary : Contains The ClassRoomData to be used across all viewModels
     public class ClassRoomViewModelBase : ViewModelBase

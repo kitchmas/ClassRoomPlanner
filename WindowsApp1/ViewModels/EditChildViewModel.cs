@@ -13,7 +13,7 @@ using Template10.Services.NavigationService;
 using Windows.Storage;
 using Windows.UI.Xaml.Navigation;
 using ClassRoomPlanner.Model;
-using WindowsApp1.ViewModels;
+using ClassRoomPlanner.ViewModels;
 
 namespace ClassRoomPlanner.ViewModels
 {
@@ -101,8 +101,6 @@ namespace ClassRoomPlanner.ViewModels
 
             }
 
-
-            //Remove the current child so you can't add the current child to SelectedChildren and crash the program
         }
 
 
@@ -110,12 +108,15 @@ namespace ClassRoomPlanner.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            currentChild = (Child)parameter;
-            LoadSelectedChildren();
+   
+         
             ObservableCollection<Child> children = await ChildrenDataService.LoadChildrenAsync();
-
+           
+      
             UpdateChildrenInClass(children);
-            //Move this next line to somewhere more approperitate
+ 
+            currentChild = ChildrenInClass.FirstOrDefault(c => c.Id == (int)parameter);
+            LoadSelectedChildren();
             ResetCopyOfChildrenInClass();
             await base.OnNavigatedToAsync(parameter, mode, state);
 

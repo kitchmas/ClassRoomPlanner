@@ -15,7 +15,8 @@ using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Navigation;
 using ClassRoomPlanner.Model;
 using System.Diagnostics;
-using WindowsApp1.ViewModels;
+using ClassRoomPlanner.ViewModels;
+
 
 namespace ClassRoomPlanner.ViewModels
 {
@@ -38,7 +39,7 @@ namespace ClassRoomPlanner.ViewModels
  }
         }
 
-        private Child selectedChild; //used to add clicked children too SelectedChildren.
+        private Child selectedChild; 
         public Child SelectedChild
         {
             get { return selectedChild; }
@@ -46,18 +47,14 @@ namespace ClassRoomPlanner.ViewModels
             {
                 if (value == null)
                     return;
-                //if (SelectedChildren.Any(item => item.Id == value.Id) == true)
-                //{
-                //    SelectedChildren.Remove(value);
-                //    UpdateChildCommand.FireCanExecuteChanged();
-                //}
+ 
 
                 else
                 {
                     selectedChild = value;
-                    //SelectedChildren.Add(_selectedChild);
+                
                     base.RaisePropertyChanged();
-                    //UpdateChildCommand.FireCanExecuteChanged();
+                
                 }
             }
         }
@@ -90,21 +87,10 @@ namespace ClassRoomPlanner.ViewModels
             return true;
         }
 
-        //Delete child from ChildrenInClass
+   
         public void DeleteChild(int Id)
         {
-            //var selectedChildrenMatch = from child in SelectedChildren
-            //                            where child.Id == Id
-            //                            select child;
-
-            //if (selectedChildrenMatch.Count() > 0)
-            //{
-            //    var scToRemove = selectedChildrenMatch.First();
-            //    if (scToRemove != null)
-            //        SelectedChildren.Remove(scToRemove);
-            //    return;
-            //}
-
+          
             var childMatch = from child in ChildrenInClass
                              where child.Id == Id
                              select child;
