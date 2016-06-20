@@ -115,7 +115,6 @@
     <Compile Include="ViewModels\ClassRoomViewModelBase.cs" />
     <Compile Include="ViewModels\EditChildViewModel.cs" />
     <Compile Include="ViewModels\EditChildrenViewModel.cs" />
-    <Compile Include="ViewModels\EditDistactingPartViewModel.cs" />
     <Compile Include="ViewModels\SeatingPlanViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\WelcomePageViewModel.cs" />
@@ -130,9 +129,6 @@
     </Compile>
     <Compile Include="Views\EditChildrenPage.xaml.cs">
       <DependentUpon>EditChildrenPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EditDistractingChildrenPage.xaml.cs">
-      <DependentUpon>EditDistractingChildrenPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditPage.xaml.cs">
       <DependentUpon>EditPage.xaml</DependentUpon>
@@ -195,10 +191,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\EditChildrenPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EditDistractingChildrenPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

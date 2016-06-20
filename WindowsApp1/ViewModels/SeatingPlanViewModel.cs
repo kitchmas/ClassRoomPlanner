@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using Windows.UI.Xaml.Navigation;
-using WindowsApp1.ViewModels;
+using ClassRoomPlanner.ViewModels;
 
 namespace ClassRoomPlanner.ViewModels
 {

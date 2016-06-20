@@ -110,6 +110,7 @@
                           SelectedItem="{Binding SelectedNumberOfChairs, Mode=TwoWay}"/>
                 <TextBox  Name="TableNameText" 
                           PlaceholderText="TableName" 
+                          Text="{x:Bind ViewModel.Name, Mode=TwoWay}"
                           HorizontalAlignment="Stretch"
                           RelativePanel.RightOf="NumberCombo"
                           Margin="10"/>

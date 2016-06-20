@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Popups;
 
-namespace WindowsApp1.Services
+namespace ClassRoomPlanner.Services
 {
     public class TableDataService
     {

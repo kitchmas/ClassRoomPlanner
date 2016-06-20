@@ -14,7 +14,7 @@ namespace ClassRoomPlanner.Model
     {
         //fix bug where id count starts again on serilization
 
-        private static int m_Counter = 0;
+        public static int m_Counter;
 
         public string Name { get; set; }
        
@@ -33,8 +33,10 @@ namespace ClassRoomPlanner.Model
 
         private List<Child> _cantSitWith;
 
-        public Child() { this.Id = System.Threading.Interlocked.Increment(ref m_Counter); }
-
+        public Child()
+        {
+        
+        }
         public Child(string name)
         {
             Name = name;

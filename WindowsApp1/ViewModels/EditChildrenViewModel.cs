@@ -12,7 +12,7 @@ using Template10.Services.NavigationService;
 using Windows.Storage;
 using Windows.UI.Xaml.Navigation;
 using ClassRoomPlanner.Model;
-using WindowsApp1.ViewModels;
+
 
 namespace ClassRoomPlanner.ViewModels
 {
@@ -37,7 +37,7 @@ namespace ClassRoomPlanner.ViewModels
                 base.RaisePropertyChanged();
             }
         }
-        public void GoToEditChildPage() => NavigationService.Navigate(typeof(Views.EditPage),SelectedChild);
+        public void GoToEditChildPage() => NavigationService.Navigate(typeof(Views.EditPage),SelectedChild.Id);
 
 
         public void GoToSeatPlanView() => NavigationService.Navigate(typeof(Views.SeatingPlanView));
