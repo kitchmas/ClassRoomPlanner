@@ -7,8 +7,8 @@
     <ProjectGuid>{E99FE651-E582-4665-AE96-42BC0538BBD6}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsApp1</RootNamespace>
-    <AssemblyName>WindowsApp1</AssemblyName>
+    <RootNamespace>ClassRoomPlanner</RootNamespace>
+    <AssemblyName>ClassRoomPlanner</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
