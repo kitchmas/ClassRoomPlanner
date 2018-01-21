@@ -5,16 +5,14 @@
 
 
 
-This app is useful for any teacher who needs a seating plant.
-The user will first enter in the children, tables, and chairs the class has. The user can then select children who they don't want to sit together and finally generate a seating plan based on certain criteria.
-
+This app is useful for any teacher who needs a seating plan made with a focus on separiting disruptive children from each other.
 ### How do I get set up? ###
 
 To set up this app in its current state you will need the latest version of visual studio and Windows 10
-Simply clone or download the repository and run .sln file.
+Simply clone or download the repository and run in visual studio.
 
 ### Current State ###
-The app currently works for the most part. I still need to do some testing and a few things need fixing and tidying up. 
+The app currently works for the most part. I still need to do some testing and a few things need fixing. 
 
 ### Created by ###
 
